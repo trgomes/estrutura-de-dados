@@ -2,5 +2,8 @@
 
 __author__ = 'thiago'
 
-print('Bora programar?');
+print('Bora programar?')
+
+
+print('\nClaro que sim')
 
