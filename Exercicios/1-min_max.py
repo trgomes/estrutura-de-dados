@@ -45,12 +45,19 @@ def min_max(seq):
     Complexidade
 
     Tempo: O(n)
-    Espaço:
+    Espaço: O(n)
 
     '''
     return minimo(seq), maximo(seq)
 
+# seq = [1,3,5,8,45,6,9,0]
+#
+# menor, maior = min_max(seq)
+#
+# print(menor, maior)
 
+
+# Testes ################################################
 class MinMaxTestes(unittest.TestCase):
     def test_lista_vazia(self):
         self.assertTupleEqual((None, None), min_max([]))
