@@ -1,25 +1,14 @@
 # -*- coding: utf-8 -*-
 
-"""
-def maximo(seq):
-    if (len(seq) == 1):
-        maior = seq[0]
-    else:
-
-        maior = maximo(seq[0:len(seq) - 1])
-
-        if maior > seq[len(seq) - 1]:
-            maior = maior
-        else:
-            maior = seq[len(seq) - 1]
-    return maior
+import unittest
 
 
 def minimo(seq):
-    if (len(seq) == 1):
+    if(seq == []):
+        return None
+    elif (len(seq) == 1):
         menor = seq[0]
     else:
-
         menor = minimo(seq[0:len(seq) - 1])
 
         if menor < seq[len(seq) - 1]:
@@ -30,39 +19,49 @@ def minimo(seq):
     return menor;
 
 
-seq = [2, 75, 8, 3, 1, 60, 15, 6]
-
-
-print(maximo(seq))
-print('\n')
-print(minimo(seq))
-
-"""
-
 def maximo(seq):
-    if (len(seq) == 1):
+    if(seq == []):
+        return None
+    elif (len(seq) == 1):
         maior = seq[0]
-        menor = seq[0]
     else:
-
         maior = maximo(seq[0:len(seq) - 1])
 
         if maior > seq[len(seq) - 1]:
             maior = maior
         else:
             maior = seq[len(seq) - 1]
-
-        menor = maximo(seq[0:len(seq) - 1])
-
-        if menor < seq[len(seq) - 1]:
-            menor = menor
-        else:
-            menor = seq[len(seq) - 1]
+    return maior
 
 
-    return menor
+def min_max(seq):
+    '''
+    :param seq: uma sequencia
+    :return: (min, max)
+    Retorna tupla cujo primeiro valor mínimo (min) é o valor
+    mínimo da sequencia seq.
+    O segundo é o valor máximo (max) da sequencia
 
-seq = [2, 75, 8, 3, 1, 60, 15, 6]
+    Complexidade
+
+    Tempo: O(n)
+    Espaço:
+
+    '''
+    return minimo(seq), maximo(seq)
 
 
-print(maximo(seq))
+class MinMaxTestes(unittest.TestCase):
+    def test_lista_vazia(self):
+        self.assertTupleEqual((None, None), min_max([]))
+
+    def test_lista_len_1(self):
+        self.assertTupleEqual((1, 1), min_max([1]))
+
+
+    def test_lista_consecutivos(self):
+        self.assertTupleEqual((0, 500), min_max(list(range(501))))
+
+
+if __name__ == '__main__':
+    unittest.main()
