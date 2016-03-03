@@ -17,29 +17,28 @@ class Lista():
         self.primeiro = None
         self.ultimo = None
 
-    def adicionar(self,valor):
+    def adicionar(self, valor):
         noh = Noh(valor)
+
         if self.tam == 0:
             self.primeiro = noh
-            # self.ultimo = self.primeiro
-        else:
-
-            self.ultimo = self.primeiro
-            self.primeiro = self.ultimo
             self.ultimo = noh
-            noh.esquerdo = self.primeiro
-            noh.direito = self.ultimo
+        else:
+            ultimo = self.primeiro
+
+            while ultimo.direito is not None:
+                ultimo = ultimo.direito
+            self.ultimo.direito = noh
+            recebeUltimo = self.ultimo
+            self.ultimo = noh
+            self.ultimo.esquerdo = recebeUltimo
 
         self.tam += 1
 
 
-
-
+    @property
     def __len__(self):
         return self.tam
-
-
-
 
 
 import unittest
