@@ -17,11 +17,22 @@ class Lista():
         self.primeiro = None
         self.ultimo = None
 
-    def adicionar(self, valor, ultimo):
+    def adicionar(self,valor):
         noh = Noh(valor)
-        self.ultimo = ultimo
+        if self.tam == 0:
+            self.primeiro = noh
+            # self.ultimo = self.primeiro
+        else:
+
+            self.ultimo = self.primeiro
+            self.primeiro = self.ultimo
+            self.ultimo = noh
+            noh.esquerdo = self.primeiro
+            noh.direito = self.ultimo
+
         self.tam += 1
-        pass
+
+
 
 
     def __len__(self):
