@@ -22,7 +22,11 @@ class Lista():
     def __len__(self):
         return self.tam
 
-
+    def __iter__(self):
+        noh_atual = self.primeiro
+        while noh_atual is not None:
+            yield noh_atual.valor
+            noh_atual = noh_atual.direito
     ############################################
 
     #Adicionar a direita
@@ -34,10 +38,10 @@ class Lista():
             self.ultimo = noh
         else:
             #Define o primeiro como ultimo
-            ultimo = self.primeiro
+            self.ultimo = self.primeiro
 
-            while ultimo.direito is not None:
-                ultimo = ultimo.direito
+            while self.ultimo.direito is not None:
+                self.ultimo = self.ultimo.direito
 
             self.ultimo.direito = noh
             anterior = self.ultimo
@@ -54,10 +58,10 @@ class Lista():
             self.primeiro = noh
             self.ultimo = noh
         else:
-            primeiro = self.ultimo
+            self.primeiro = self.ultimo
 
-            while primeiro.esquerdo is not None:
-                primeiro = primeiro.esquerdo
+            while self.primeiro.esquerdo is not None:
+                self.primeiro = self.primeiro.esquerdo
 
             self.primeiro.esquerdo = noh
             anterior = self.primeiro
@@ -85,7 +89,7 @@ class Lista():
             return valorRetorno
         else:
             valorRetorno = self.ultimo.valor
-            self.ultimo = self.primeiro.esquerdo
+            self.ultimo = self.ultimo.esquerdo
             self.ultimo.direito = None
             self.tam -= 1
             return valorRetorno
