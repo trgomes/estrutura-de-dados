@@ -17,6 +17,15 @@ class Lista():
         self.primeiro = None
         self.ultimo = None
 
+
+    # Metodos magicos############################
+    def __len__(self):
+        return self.tam
+
+
+    ############################################
+
+    #Adicionar a direita
     def adicionar(self, valor):
         noh = Noh(valor)
 
@@ -37,6 +46,7 @@ class Lista():
 
         self.tam += 1
 
+    #Adicionar a esquerda
     def adicionar_a_esquerda(self, valor):
         noh = Noh(valor)
 
@@ -56,10 +66,55 @@ class Lista():
 
         self.tam += 1
 
+    #Metodo remover a direita
+    def remover(self):
+        if self.tam == 0:
+            raise ListaVaziaErro
+        elif self.tam == 1:
+            valorRetorno = self.primeiro.valor
+            self.primeiro = None
+            self.ultimo = None
+            self.tam -= 1
+            return valorRetorno
+        elif self.tam == 2:
+            valorRetorno = self.ultimo.valor
+            self.ultimo.esquerdo = None
+            self.primeiro.direito = None
+            self.ultimo = self.primeiro
+            self.tam -= 1
+            return valorRetorno
+        else:
+            valorRetorno = self.ultimo.valor
+            self.ultimo = self.primeiro.esquerdo
+            self.ultimo.direito = None
+            self.tam -= 1
+            return valorRetorno
 
-    @property
-    def __len__(self):
-        return self.tam
+    #Metodo remover a esquerda
+    def remover_a_esquerda(self):
+        if self.tam == 0:
+            raise ListaVaziaErro
+        elif self.tam == 1:
+            valorRetorno = self.primeiro.valor
+            self.primeiro = None
+            self.ultimo = None
+            self.tam -= 1
+            return valorRetorno
+        elif self.tam == 2:
+            valorRetorno = self.primeiro.valor
+            self.primeiro.direito = None
+            self.ultimo.esquerdo = None
+            self.primeiro  = self.ultimo
+            self.tam -= 1
+            return valorRetorno
+        else:
+            valorRetorno = self.primeiro.valor
+            self.primeiro = self.primeiro.direito
+            self.primeiro.esquerdo = None
+            self.tam -= 1
+            return valorRetorno
+
+
 
 
 import unittest
