@@ -24,14 +24,35 @@ class Lista():
             self.primeiro = noh
             self.ultimo = noh
         else:
+            #Define o primeiro como ultimo
             ultimo = self.primeiro
 
             while ultimo.direito is not None:
                 ultimo = ultimo.direito
+
             self.ultimo.direito = noh
-            recebeUltimo = self.ultimo
+            anterior = self.ultimo
             self.ultimo = noh
-            self.ultimo.esquerdo = recebeUltimo
+            self.ultimo.esquerdo = anterior
+
+        self.tam += 1
+
+    def adicionar_a_esquerda(self, valor):
+        noh = Noh(valor)
+
+        if self.tam == 0:
+            self.primeiro = noh
+            self.ultimo = noh
+        else:
+            primeiro = self.ultimo
+
+            while primeiro.esquerdo is not None:
+                primeiro = primeiro.esquerdo
+
+            self.primeiro.esquerdo = noh
+            anterior = self.primeiro
+            self.primeiro = noh
+            self.primeiro.direito = anterior
 
         self.tam += 1
 
