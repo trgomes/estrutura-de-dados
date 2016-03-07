@@ -80,13 +80,6 @@ class Lista():
             self.ultimo = None
             self.tam -= 1
             return valorRetorno
-        elif self.tam == 2:
-            valorRetorno = self.ultimo.valor
-            self.ultimo.esquerdo = None
-            self.primeiro.direito = None
-            self.ultimo = self.primeiro
-            self.tam -= 1
-            return valorRetorno
         else:
             valorRetorno = self.ultimo.valor
             self.ultimo = self.ultimo.esquerdo
@@ -104,22 +97,12 @@ class Lista():
             self.ultimo = None
             self.tam -= 1
             return valorRetorno
-        elif self.tam == 2:
-            valorRetorno = self.primeiro.valor
-            self.primeiro.direito = None
-            self.ultimo.esquerdo = None
-            self.primeiro  = self.ultimo
-            self.tam -= 1
-            return valorRetorno
         else:
             valorRetorno = self.primeiro.valor
             self.primeiro = self.primeiro.direito
             self.primeiro.esquerdo = None
             self.tam -= 1
             return valorRetorno
-
-
-
 
 import unittest
 
