@@ -140,7 +140,7 @@ class NohTestes(unittest.TestCase):
 class ListaTestes(unittest.TestCase):
     def test_init(self):
         lista = Lista()
-        self.assertEquals(0, lista.tam)
+        self.assertEqual(0, lista.tam)
         self.assertIsNone(lista.primeiro)
         self.assertIsNone(lista.ultimo)
 
