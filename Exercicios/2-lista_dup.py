@@ -17,7 +17,6 @@ class Lista():
         self.primeiro = None
         self.ultimo = None
 
-
     # Metodos magicos############################
     def __len__(self):
         return self.tam
