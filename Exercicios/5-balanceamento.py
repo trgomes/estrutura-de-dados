@@ -41,6 +41,11 @@ def esta_balanceada(expressao):
     :param expressao: string com expressao a ser balanceada
     :return: boleano verdadeiro se expressao está balanceada e falso caso contrário
 
+    Complexidade
+
+    Tempo: O(n)
+    Memoria: O(1)
+
     """
 
     if expressao:
@@ -62,7 +67,7 @@ def esta_balanceada(expressao):
                 elif i==')' and pilha.desempilhar() != '(':
                     return False
 
-        if len(pilha.lista) == 0:
+        if pilha.vazia():
             return True
         return False
 
