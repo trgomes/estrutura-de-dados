@@ -3,8 +3,34 @@
 import unittest
 
 
-def esta_balanceada(expressao):
+class PilhaVaziaErro(Exception):
+    pass
 
+
+class Pilha():
+    def __init__(self):
+        self.lista = []
+
+    def topo(self):
+        if self.lista:
+            return self.lista[-1]
+        raise PilhaVaziaErro()
+
+    def vazia(self):
+        return not bool(self.lista)
+
+    def empilhar(self, valor):
+        self.lista.append(valor)
+
+
+    def desempilhar(self):
+        try:
+            return self.lista.pop()
+        except IndexError:
+            raise PilhaVaziaErro
+
+
+def esta_balanceada(expressao):
     """
     Função que calcula se expressão possui parenteses, colchetes e chaves balanceados
 
@@ -14,20 +40,34 @@ def esta_balanceada(expressao):
 
     :param expressao: string com expressao a ser balanceada
     :return: boleano verdadeiro se expressao está balanceada e falso caso contrário
+
     """
 
     if expressao:
-        lista = []
 
-        for x in range(lista):
-            pass
+        pilha = Pilha()
 
-    return True
+        if expressao[0] in '}])':
+            return False
 
+        for i in expressao:
 
+            if i in '{[(':
+                pilha.empilhar(i)
+            elif i in '}])':
+                if i=='}' and pilha.desempilhar() != '{':
+                    return False
+                elif i==']' and pilha.desempilhar() != '[':
+                    return False
+                elif i==')' and pilha.desempilhar() != '(':
+                    return False
 
+        if len(pilha.lista) == 0:
+            return True
+        return False
 
-
+    else:
+        return True
 
 
 class BalancearTestes(unittest.TestCase):
