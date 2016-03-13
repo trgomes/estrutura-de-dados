@@ -44,7 +44,7 @@ def esta_balanceada(expressao):
     Complexidade
 
     Tempo: O(n)
-    Memoria: O(1)
+    Memoria: O(n)
 
     """
 
