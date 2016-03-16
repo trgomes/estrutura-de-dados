@@ -30,15 +30,28 @@ def analise_lexica(expressao):
     #numero e tolkens
     nt = R"0123456789.-+*/{}[]()"
 
-    print (nt)
-
     if expressao:
+
+        valor = ''
+
         for i in expressao:
             if i in nt:
-                fila.enfileirar()
+                if i in '.-+*/{}[]()':
+                    if valor:
+                        fila.enfileirar(valor)
+                        valor = ''
+                    fila.enfileirar(i)
+                else:
+                    valor = valor + i
+            else:
+                raise ErroLexico()
 
+        if valor:
+            fila.enfileirar(valor)
 
     return fila
+
+
 
 
 def analise_sintatica(fila):
