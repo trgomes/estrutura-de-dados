@@ -27,7 +27,7 @@ def analise_lexica(expressao):
     """
     fila = Fila()
 
-    #numero e tolkens
+    #numeros e tokens
     nt = R"0123456789.-+*/{}[]()"
 
     if expressao:
@@ -52,8 +52,6 @@ def analise_lexica(expressao):
     return fila
 
 
-
-
 def analise_sintatica(fila):
     """
     Função que realiza analise sintática de tokens produzidos por analise léxica.
@@ -62,7 +60,24 @@ def analise_sintatica(fila):
     :param fila: fila proveniente de análise lexica
     :return: fila_sintatica com elementos tokens de numeros
     """
-    pass
+    # print (int(fila._deque[0]))
+
+    print(fila._deque)
+
+    if fila.__len__():
+
+        for i in range(fila.__len__()):
+            fila.enfileirar(int(fila._deque[i]))
+            print(fila._deque)
+            fila.desenfileirar()
+            print(fila._deque)
+            print(type(fila.primeiro()))
+
+            return fila.primeiro()
+    else:
+        raise ErroSintatico
+
+
 
 
 def avaliar(expressao):
