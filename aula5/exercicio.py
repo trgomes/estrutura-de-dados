@@ -60,24 +60,39 @@ def analise_sintatica(fila):
     :param fila: fila proveniente de análise lexica
     :return: fila_sintatica com elementos tokens de numeros
     """
-    # print (int(fila._deque[0]))
-
-    print(fila._deque)
 
     if fila.__len__():
 
-        for i in range(fila.__len__()):
-            fila.enfileirar(int(fila._deque[i]))
-            print(fila._deque)
-            fila.desenfileirar()
-            print(fila._deque)
-            print(type(fila.primeiro()))
+        # Cria um novo objeto fila para adicionar os valores
+        fila_sintetica = Fila()
 
-            return fila.primeiro()
+        #Variavel de apoio para juntar a string
+        valor = ''
+
+        for i in range(fila.__len__()):
+
+            if fila._deque[i] in '-+/*(){}[]':
+                if valor:
+                    if '.' in valor:
+                        fila_sintetica.enfileirar(float(valor))
+                    else:
+                        fila_sintetica.enfileirar(int(valor))
+
+
+                valor = ''
+                fila_sintetica.enfileirar(fila._deque[i])
+            else:
+                valor = valor + fila._deque[i]
+
+        if valor:
+            if '.' in valor:
+                fila_sintetica.enfileirar(float(valor))
+            else:
+                fila_sintetica.enfileirar(int(valor))
+
+        return fila_sintetica
     else:
         raise ErroSintatico
-
-
 
 
 def avaliar(expressao):
@@ -214,8 +229,7 @@ class AnaliseSintaticaTestes(unittest.TestCase):
     def test_expressao_com_todos_elementos(self):
         fila = analise_lexica('1000/{222.125+3*[7-(5-3)]}')
         fila_sintatica = analise_sintatica(fila)
-        self.assertListEqual([1000, '/', '{', 222.125, '+', 3, '*', '[', 7, '-', '(', 5, '-', 3, ')', ']', '}'],
-                             [e for e in fila_sintatica])
+        self.assertListEqual([1000, '/', '{', 222.125, '+', 3, '*', '[', 7, '-', '(', 5, '-', 3, ')', ']', '}'],[e for e in fila_sintatica])
 
 
 class AvaliacaoTestes(unittest.TestCase):
