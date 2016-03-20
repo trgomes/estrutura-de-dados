@@ -3,9 +3,10 @@
 # Exercício de avaliação de expressão aritmética.
 # Só podem ser usadas as estruturas Pilha e Fila implementadas em aulas anteriores.
 # Deve ter análise de tempo e espaço para função avaliação
-
+from pyparsing import _NullToken
 
 from aula5.fila import Fila
+from aula4.pilha import Pilha
 
 
 class ErroLexico(Exception):
@@ -101,7 +102,60 @@ def avaliar(expressao):
     :param expressao: string com expressão aritmética
     :return: valor númerico com resultado
     """
-    pass
+
+    if expressao:
+
+        fila = analise_sintatica(analise_lexica(expressao))
+
+        print(fila._deque)
+
+        if fila.__len__() == 1:
+            return fila.primeiro()
+        else:
+            pilha = Pilha()
+
+            for i in range(fila.__len__()):
+
+                pilha.empilhar(fila._deque[i])
+
+                if pilha.__len__() >= 3 and str(pilha.topo()) not in '-+*/(){}[]':
+
+                    valor = pilha.topo()
+                    pilha.desempilhar()
+
+                    if pilha.topo() == '+':
+                        pilha.desempilhar()
+                        valor = pilha.desempilhar() + valor
+                        pilha.empilhar(valor)
+                        valor = ''
+                    elif pilha.topo() == '-':
+                        pilha.desempilhar()
+                        valor = pilha.desempilhar() - valor
+                        pilha.empilhar(valor)
+                        valor = ''
+                    elif pilha.topo() == '*':
+                        pilha.desempilhar()
+                        valor = pilha.desempilhar() * valor
+                        pilha.empilhar(valor)
+                        valor = ''
+                    elif pilha.topo() == '/':
+                        pilha.desempilhar()
+                        valor = pilha.desempilhar() / valor
+                        pilha.empilhar(valor)
+                        valor = ''
+                    else:
+                        pilha.empilhar(valor)
+
+                elif str(pilha.topo()) in ')}]' and i == fila.__len__() - 1:
+                    pilha.desempilhar()
+
+
+
+            print('Nova pilha: ',pilha._lista)
+
+            return pilha.topo()
+
+    raise ErroSintatico()
 
 
 import unittest
