@@ -3,7 +3,6 @@
 # Exercício de avaliação de expressão aritmética.
 # Só podem ser usadas as estruturas Pilha e Fila implementadas em aulas anteriores.
 # Deve ter análise de tempo e espaço para função avaliação
-from pyparsing import _NullToken
 
 from aula5.fila import Fila
 from aula4.pilha import Pilha
