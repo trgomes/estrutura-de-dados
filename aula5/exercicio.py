@@ -4,9 +4,8 @@
 # Só podem ser usadas as estruturas Pilha e Fila implementadas em aulas anteriores.
 # Deve ter análise de tempo e espaço para função avaliação
 
-from aula5.fila import Fila
 from aula4.pilha import Pilha
-
+from aula5.fila import Fila
 
 
 class ErroLexico(Exception):
