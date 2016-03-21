@@ -7,7 +7,6 @@
 from aula4.pilha import Pilha
 from aula5.fila import Fila
 
-
 class ErroLexico(Exception):
     pass
 
