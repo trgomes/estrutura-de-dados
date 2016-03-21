@@ -9,6 +9,7 @@ from aula5.fila import Fila
 from aula4.pilha import Pilha
 
 
+
 class ErroLexico(Exception):
     pass
 
@@ -101,13 +102,18 @@ def avaliar(expressao):
     Função que avalia expressão aritmetica retornando se valor se não houver nenhum erro
     :param expressao: string com expressão aritmética
     :return: valor númerico com resultado
+
+    Complexidade*:
+
+    tempo: O(n)
+    Memoria: O(n)
     """
 
     if expressao:
 
         fila = analise_sintatica(analise_lexica(expressao))
 
-        print(fila._deque)
+        # print(fila._deque)
 
         if fila.__len__() == 1:
             return fila.primeiro()
@@ -149,9 +155,44 @@ def avaliar(expressao):
                 elif str(pilha.topo()) in ')}]' and i == fila.__len__() - 1:
                     pilha.desempilhar()
 
+                    # print(pilha._lista)
+
+                    while len(pilha) > 1:
+
+                        if str(pilha.topo()) not in '-+*/(){}[]':
+                            valor = pilha.topo()
+                            pilha.desempilhar()
+
+                            if pilha.topo() == '+':
+                                pilha.desempilhar()
+                                valor = pilha.desempilhar() + valor
+                                pilha.empilhar(valor)
+                                valor = ''
+                            elif pilha.topo() == '-':
+                                pilha.desempilhar()
+                                valor = pilha.desempilhar() - valor
+                                pilha.empilhar(valor)
+                                valor = ''
+                            elif pilha.topo() == '*':
+                                pilha.desempilhar()
+                                valor = pilha.desempilhar() * valor
+                                pilha.empilhar(valor)
+                                valor = ''
+                            elif pilha.topo() == '/':
+                                pilha.desempilhar()
+                                valor = pilha.desempilhar() / valor
+                                pilha.empilhar(valor)
+                                valor = ''
+                            elif str(pilha.topo()) in '(){}[]':
+                                pilha.desempilhar()
+                                pilha.empilhar(valor)
+                            else:
+                                pilha.empilhar(valor)
+                        else:
+                            pilha.desempilhar()
 
 
-            print('Nova pilha: ',pilha._lista)
+            # print('Nova pilha: ',pilha._lista, 'Tamanho: ', len(pilha))
 
             return pilha.topo()
 
