@@ -20,13 +20,16 @@ def bubble_sort(seq):
 
     '''
 
+    cont = 0
+
     for i in range(len(seq)-1):
 
         for x in range(len(seq)-1):
             if seq[x] > seq[x+1]:
                seq[x], seq[x+1] = seq[x+1], seq[x]
                if i == 0: cont = 1
-        if cont and cont != 1: break
+
+        if cont != 1: break
 
     return seq
 
