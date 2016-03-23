@@ -4,6 +4,22 @@ import unittest
 
 def bubble_sort(seq):
 
+    '''
+    :param seq:
+    :return: seq ordenada
+
+    Complexidade (Pior Caso)
+
+    Tempo: O(n^2)
+    Memória: O(1)
+
+    Complexidade (Melhor Caso - Lista de entrada já está ordenada)
+
+    Tempo: O(n)
+    Memória: O(1)
+
+    '''
+
     for i in range(len(seq)-1):
 
         for x in range(len(seq)-1):
