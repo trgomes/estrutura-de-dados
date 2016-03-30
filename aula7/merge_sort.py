@@ -17,6 +17,7 @@ def _merge(seq_esquerda, seq_direita):
     return lista_mesclada
 
 
+
 def merge_sort(seq):
     n = len(seq)
     if n <= 1:

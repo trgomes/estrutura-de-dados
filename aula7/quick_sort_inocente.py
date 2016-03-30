@@ -14,6 +14,7 @@ def quick_sort(seq):
 
 
 
+
 class OrdenacaoTestes(unittest.TestCase):
     def teste_lista_vazia(self):
         self.assertListEqual([], quick_sort([]))

@@ -20,6 +20,7 @@ def _quick_recursivo(seq, inicio, final):
     return seq
 
 
+
 def quick_sort(seq):
     return _quick_recursivo(seq, 0, len(seq) - 1)
 
