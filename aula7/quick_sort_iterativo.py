@@ -1,26 +1,47 @@
 import unittest
 
-seq = [1, 1, 2]
-
-
 def _quick_recursivo(seq, inicio, final):
+
     if inicio >= final:
         return seq
-    indice_pivot = final
-    pivot = seq[-1]
-    i_menor = inicio
-    i_maior = final - 1
 
-    # posicionar pivot
+    indice_pivot = final
+    pivot = seq[indice_pivot]
+    i_esquerda = inicio
+    i_direita = final - 1
+
+    #posicionar pivot
+    while i_esquerda <= i_direita:
+
+        while i_esquerda <= i_direita and seq[i_esquerda] <= pivot:
+            i_esquerda += 1
+        while i_esquerda <= i_direita and seq[i_direita] >= pivot:
+            i_direita -= 1
+
+        if i_esquerda < i_direita:
+            seq[i_esquerda], seq[i_direita] = seq[i_direita], seq[i_esquerda]
+
+    seq[i_esquerda], seq[final] = seq[final], seq[i_esquerda]
 
     # Resolver para sublista da esquerda
+    _quick_recursivo(seq, inicio, i_esquerda - 1)
 
     # Resolver para sublista da direita
+    _quick_recursivo(seq, i_esquerda + 1, final)
 
     return seq
 
 
 def quick_sort(seq):
+    '''
+    :param seq:
+    :return: seq ordenada
+
+    Complexidade:
+
+    Tempo: O(n**2)
+    Espaço: O(log(n))
+    '''
     return _quick_recursivo(seq, 0, len(seq) - 1)
 
 
