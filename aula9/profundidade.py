@@ -1,10 +1,21 @@
 class Noh:
-    pass
+    def __init__(self, valor, pai = None, filho_esquerdo = None, irmao_direito = None):
+        self.valor = valor
+        self.pai = pai
+        self.filho_esquerdo = filho_esquerdo
+        self.irmao_direito = irmao_direito
+
+        if pai:
+            pai.filho_esquerdo = self
+
+
+    def adicionar(self):
+        pass
+
 
 
 class Arvore:
-    pass
-
+   pass
 
 from unittest.case import TestCase
 
