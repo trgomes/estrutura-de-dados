@@ -1,4 +1,5 @@
 class Noh:
+
     def __init__(self, valor, pai = None, filho_esquerdo = None, irmao_direito = None):
         self.valor = valor
         self.pai = pai
@@ -9,8 +10,19 @@ class Noh:
             pai.filho_esquerdo = self
 
 
-    def adicionar(self):
-        pass
+    def adicionar(self, filho):
+        # print(self, filho)
+
+        if self.filho_esquerdo:
+            proximoFilho = self.filho_esquerdo
+            while proximoFilho.irmao_direito:
+                proximoFilho = proximoFilho.irmao_direito
+            proximoFilho.irmao_direito = filho
+        else:
+            filho.pai = self
+            self.filho_esquerdo = filho
+            filho.irmao_direito = None
+
 
 
 
@@ -97,7 +109,9 @@ class ArvoreTestes(TestCase):
         self.assertListEqual([1], travessia_arvore_unitaria)
         arvore_binaria = self.gerar_arvore_binaria()
         travessia_arvore_binaria = [i for i in arvore_binaria]
-        self.assertListEqual([0, 1, 3, 4, 2, 6, 7, 9, 8, 5], travessia_arvore_binaria)
+        pos_ordem = [0, 1, 3, 4, 2, 6, 7, 9, 8, 5]
+        pre_ordem = [5, 2, 1, 0, 4, 3, 8, 7, 6, 9]
+        self.assertTrue(travessia_arvore_binaria == pos_ordem or travessia_arvore_binaria == pre_ordem)
 
     def gerar_arvore_binaria(self):
         nohs = [Noh(i) for i in range(10)]
