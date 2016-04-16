@@ -23,11 +23,24 @@ class Noh:
             self.filho_esquerdo = filho
             filho.irmao_direito = None
 
-
-
-
 class Arvore:
-   pass
+
+    def __init__(self, raiz = None):
+        self.raiz = raiz
+
+    def altura(self):
+        if self.raiz:
+            altura = 0
+
+            while self.raiz:
+                # print("Aqui")
+                self.raiz = self.raiz.filho_esquerdo
+                altura += 1
+
+            return altura
+        return 0
+
+
 
 from unittest.case import TestCase
 
