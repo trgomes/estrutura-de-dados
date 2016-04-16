@@ -1,5 +1,12 @@
 class Noh:
-    pass
+    def __init__(self, valor, pai = None, filhos = []):
+        self.valor = valor
+        self.pai = pai
+        self.filhos = filhos
+
+        if pai:
+            filhos.append(self)
+
 
 
 class Arvore:
