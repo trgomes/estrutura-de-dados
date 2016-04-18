@@ -1,16 +1,48 @@
 class Noh:
-    def __init__(self, valor, pai = None, filhos = []):
+    def __init__(self, valor, pai = None):
         self.valor = valor
         self.pai = pai
-        self.filhos = filhos
+
+        self.filhos = []
 
         if pai:
-            filhos.append(self)
+            pai.filhos.append(self)
+            # print(pai.filhos)
 
+    def adicionar(self, filho):
+        filho.pai = self
+        self.filhos.append(filho)
 
 
 class Arvore:
-    pass
+    def __init__(self, raiz = None):
+        self.raiz = raiz
+
+    def altura(self):
+
+        if self.raiz:
+            altura = 1
+            while self.raiz.filhos:
+                self.raiz = self.raiz.filhos[0]
+                altura += 1
+            return altura
+        return 0
+
+    def __iter__(self):
+        if self.raiz == None:
+            return self.raiz
+
+        pilha = []
+        pilha.append(self.raiz)
+
+        while pilha:
+            noh = pilha.pop(0)
+            if noh.pai == None:
+                yield noh.valor
+
+            for i in noh.filhos:
+                i.pai = None
+                pilha.append(i)
 
 
 from unittest.case import TestCase

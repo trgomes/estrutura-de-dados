@@ -12,7 +12,6 @@ class Noh:
 
     def adicionar(self, filho):
         # print(self, filho)
-
         if self.filho_esquerdo:
             proximoFilho = self.filho_esquerdo
             while proximoFilho.irmao_direito:
@@ -39,6 +38,21 @@ class Arvore:
 
             return altura
         return 0
+
+    def __iter__(self):
+        if self.raiz == None:
+            return self.raiz
+
+        pilha = []
+        pilha.append(self.raiz)
+
+        while pilha:
+            noh = pilha.pop()
+            if noh.irmao_direito:
+                pilha.append(noh.irmao_direito)
+            if noh.filho_esquerdo:
+                pilha.append(noh.filho_esquerdo)
+            yield noh.valor
 
 
 
