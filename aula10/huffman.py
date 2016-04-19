@@ -23,6 +23,13 @@ def codificar(cod_dict, s):
 
 
 class Noh:
+
+
+    def __init__(self, peso, esquerdo = None, direito = None):
+        self.peso = peso
+        self.esquerdo = esquerdo
+        self.direito = direito
+
     def __hash__(self):
         return hash(self.peso)
 
@@ -32,7 +39,12 @@ class Noh:
         return self.peso == other.peso and self.esquerdo == other.esquerdo and self.direito == other.direito
 
 
+
 class Folha():
+    def __init__(self, char, peso):
+        self.char = char
+        self.peso = peso
+
     def __hash__(self):
         return hash(self.__dict__)
 
