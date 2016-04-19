@@ -1,5 +1,17 @@
 def calcular_frequencias(s):
-    pass
+
+    if len(s) == 0:
+        return {}
+    else:
+        seq = {}
+        for i in range(len(s)):
+            if i != 0 and s[i] in s[0 : i]:
+                continue
+            else:
+                seq[s[i]] = s.count(s[i])
+
+    return seq
+
 
 
 def gerar_arvore_de_huffman(s):
