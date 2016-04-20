@@ -15,6 +15,9 @@ def calcular_frequencias(s):
 
 
 def gerar_arvore_de_huffman(s):
+
+    seq = calcular_frequencias(s)
+
     pass
 
 
@@ -23,7 +26,6 @@ def codificar(cod_dict, s):
 
 
 class Noh:
-
 
     def __init__(self, peso, esquerdo = None, direito = None):
         self.peso = peso
@@ -37,7 +39,6 @@ class Noh:
         if other is None or not isinstance(other, Noh):
             return False
         return self.peso == other.peso and self.esquerdo == other.esquerdo and self.direito == other.direito
-
 
 
 class Folha():
@@ -55,6 +56,16 @@ class Folha():
 
 
 class Arvore(object):
+    def __init__(self, char = None, peso = None):
+        self.char = char
+        self.peso = peso
+
+        if self.char:
+            self.raiz = Folha(self.char, self.peso)
+        else:
+            self.raiz = None
+
+
     def __hash__(self):
         return hash(self.raiz)
 
@@ -62,6 +73,20 @@ class Arvore(object):
         if other is None:
             return False
         return self.raiz == other.raiz
+
+    # Implementar
+    def fundir(self, arvore):
+        novaArvore =  Arvore()
+
+        novaArvore.raiz = Noh(self.raiz.peso + arvore.raiz.peso)
+
+        pass
+
+
+
+    # Implementar
+    def decodificar(self, param):
+        pass
 
 
 from unittest import TestCase
