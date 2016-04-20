@@ -10,13 +10,16 @@ def calcular_frequencias(s):
             else:
                 seq[s[i]] = s.count(s[i])
 
-    return seq
+    print(seq)
 
+    return seq
 
 
 def gerar_arvore_de_huffman(s):
 
     seq = calcular_frequencias(s)
+
+
 
     pass
 
@@ -76,16 +79,53 @@ class Arvore(object):
 
     # Implementar
     def fundir(self, arvore):
-        novaArvore =  Arvore()
 
-        novaArvore.raiz = Noh(self.raiz.peso + arvore.raiz.peso)
+        if self.peso > arvore.peso:
+            maior = self.raiz
+            menor = arvore.raiz
+        else:
+            maior = arvore.raiz
+            menor = self.raiz
 
+        peso = self.peso + arvore.peso
+        raiz = Noh(peso, maior, menor)
+
+        novaArvore = Arvore(peso=peso)
+
+        novaArvore.raiz = raiz
+
+        return novaArvore
+
+    # Implementar
+    def decodificar(self, param):
+        pass
+
+    def cod_dict(self):
+
+        print(self.raiz.char)
+
+        dic = {}
+        caminho = []
+        visitar = []
+
+        visitar.append(self.raiz)
+
+        while len(visitar) != 0:
+            atual = visitar.pop()
+
+            if atual is Folha:
+                visitar.append()
+            else:
+                visitar.append(self.raiz)
         pass
 
 
 
-    # Implementar
-    def decodificar(self, param):
+
+
+
+
+
         pass
 
 
