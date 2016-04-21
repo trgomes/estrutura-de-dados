@@ -10,8 +10,6 @@ def calcular_frequencias(s):
             else:
                 seq[s[i]] = s.count(s[i])
 
-    print(seq)
-
     return seq
 
 
@@ -19,13 +17,49 @@ def gerar_arvore_de_huffman(s):
 
     seq = calcular_frequencias(s)
 
+    # menor = min(seq.values())
+    lista_items = seq.items()
 
+    lista_order_desc = sorted(lista_items)
 
-    pass
+    while len(lista_order_desc) != 2:
+        primeiro = lista_order_desc.pop()
+        arvore1 = Arvore(primeiro[0], primeiro[-1])
+
+        segundo = lista_order_desc.pop()
+        arvore2 = Arvore(segundo[0], segundo[-1])
+
+        lista_order_desc.append(arvore1.fundir(arvore2))
+
+    primeiro = lista_order_desc.pop()
+    segundo = lista_order_desc.pop()
+
+    if isinstance(primeiro, Arvore) and isinstance(segundo, Arvore):
+        arvore_fundida = primeiro.fundir(segundo)
+    elif isinstance(primeiro, Arvore):
+        arvore = Arvore(segundo[0], segundo[-1])
+        arvore_fundida = primeiro.fundir(arvore)
+    elif isinstance(segundo, Arvore):
+        arvore = Arvore(primeiro[0], primeiro[-1])
+        arvore_fundida = arvore.fundir(segundo)
+    else:
+        arvore1 = Arvore(primeiro[0], primeiro[-1])
+        arvore2 = Arvore(segundo[0], segundo[-1])
+        arvore_fundida = arvore1.fundir(arvore2)
+
+    return arvore_fundida
 
 
 def codificar(cod_dict, s):
-    pass
+    dic = cod_dict
+
+    cod = ""
+
+    for i in s:
+        if i in dic.keys():
+            cod += dic[i]
+
+    return cod
 
 
 class Noh:
@@ -96,14 +130,9 @@ class Arvore(object):
 
         return novaArvore
 
-    # Implementar
-    def decodificar(self, param):
-        pass
 
+    # Codificar
     def cod_dict(self):
-
-        print(self.raiz.char)
-
         dic = {}
         caminho = []
         visitar = []
@@ -112,21 +141,44 @@ class Arvore(object):
 
         while len(visitar) != 0:
             atual = visitar.pop()
+            # print(atual.direito.peso, atual.esquerdo.char)
 
-            if atual is Folha:
-                visitar.append()
+            # if type(atual) is Folha:
+            if isinstance(atual, Folha):
+                letra = atual.char
+                dic[letra] = ''.join(caminho)
+                caminho.pop()
+                caminho.append('1')
             else:
-                visitar.append(self.raiz)
-        pass
+                visitar.append(atual.direito)
+                visitar.append(atual.esquerdo)
+                caminho.append('0')
+
+        return dic
 
 
+    # Decodificar
+    def decodificar(self, caminho):
+        # print(self.raiz.peso)
 
+        letras = []
+        atual = self.raiz
 
+        if isinstance(atual, Folha):
+            return atual.char
+        else:
+            for i in caminho:
+                if i == '0':
+                    atual = atual.esquerdo
+                else:
+                    atual = atual.direito
 
+                if isinstance(atual, Folha):
+                    letras.append(atual.char)
+                    atual = self.raiz
 
+        return ''.join(letras)
 
-
-        pass
 
 
 from unittest import TestCase
