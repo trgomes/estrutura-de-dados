@@ -1,3 +1,6 @@
+from collections import deque
+
+
 def calcular_frequencias(s):
 
     if len(s) == 0:
@@ -14,38 +17,36 @@ def calcular_frequencias(s):
 
 
 def gerar_arvore_de_huffman(s):
-
     seq = calcular_frequencias(s)
 
-    # menor = min(seq.values())
-    lista_items = seq.items()
+    lista_de_tuplas = ([(valor, chave) for chave, valor in seq.items()])
 
-    lista_order_desc = sorted(lista_items)
+    lista_ordenada = deque(sorted(lista_de_tuplas))
 
-    while len(lista_order_desc) != 2:
-        primeiro = lista_order_desc.pop()
-        arvore1 = Arvore(primeiro[0], primeiro[-1])
+    while len(lista_ordenada) != 0:
 
-        segundo = lista_order_desc.pop()
-        arvore2 = Arvore(segundo[0], segundo[-1])
+        if len(lista_ordenada) == 1:
+            return lista_ordenada[0][-1]
 
-        lista_order_desc.append(arvore1.fundir(arvore2))
+        primeiro = lista_ordenada.popleft()
+        segundo = lista_ordenada.popleft()
 
-    primeiro = lista_order_desc.pop()
-    segundo = lista_order_desc.pop()
+        if isinstance(primeiro[-1], Arvore) and isinstance(segundo[-1], Arvore):
+            arvore_fundida = primeiro.fundir(segundo)
+        elif isinstance(primeiro[-1], Arvore):
+            arvore = Arvore(segundo[-1], segundo[0])
+            arvore_fundida = primeiro[-1].fundir(arvore)
+        elif isinstance(segundo[-1], Arvore):
+            arvore = Arvore(primeiro[-1], primeiro[0])
+            arvore_fundida = arvore.fundir(segundo[-1])
+        else:
+            arvore1 = Arvore(primeiro[-1], primeiro[0])
+            arvore2 = Arvore(segundo[-1], segundo[0])
+            arvore_fundida = arvore1.fundir(arvore2)
 
-    if isinstance(primeiro, Arvore) and isinstance(segundo, Arvore):
-        arvore_fundida = primeiro.fundir(segundo)
-    elif isinstance(primeiro, Arvore):
-        arvore = Arvore(segundo[0], segundo[-1])
-        arvore_fundida = primeiro.fundir(arvore)
-    elif isinstance(segundo, Arvore):
-        arvore = Arvore(primeiro[0], primeiro[-1])
-        arvore_fundida = arvore.fundir(segundo)
-    else:
-        arvore1 = Arvore(primeiro[0], primeiro[-1])
-        arvore2 = Arvore(segundo[0], segundo[-1])
-        arvore_fundida = arvore1.fundir(arvore2)
+        lista_ordenada.append((arvore_fundida.peso, arvore_fundida))
+
+        lista_ordenada = deque(sorted(lista_ordenada))
 
     return arvore_fundida
 
