@@ -14,7 +14,11 @@ class Arco():
 
     def oposto(self, param):
 
-        pass
+        if param == 'origem':
+            return self.vertices[-1]
+        else:
+            return self.vertices[0]
+
 
 
 import unittest
@@ -77,8 +81,10 @@ arcos_distancias = (arco_tauba_sjc,
 
 
 class Grafo():
-    
-    pass
+
+    def vertices(self):
+
+        pass
 
 
 class GrafoTestes(unittest.TestCase):
