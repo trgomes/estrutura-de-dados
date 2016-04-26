@@ -83,27 +83,28 @@ arcos_distancias = (arco_tauba_sjc,
 class Grafo():
 
     def __init__(self):
-        self.vertice = ()
-        self.arco =  ()
-        self.adjacencia = ()
+        self.vertice = []
+        self.arco = []
+        self.adjacencia = []
 
 
     def vertices(self):
         return self.vertice
 
     def adicionar_vertice(self, nome_vertice):
-        self.vertice += nome_vertice,
+        self.vertice.append(nome_vertice)
         # print(self.vertice)
 
     def arcos(self, nome_arco):
         return self.arco
 
     def adicionar_arco(self, nome_arco):
-        self.arco += nome_arco,
+        self.arco.append(nome_arco),
+        # print(self.arco)
 
     def adjacencias(self, nome_adjacencia):
-        # return self.adjacencia
-        pass
+        return self.adjacencia
+
 
 
 class GrafoTestes(unittest.TestCase):
