@@ -14,12 +14,11 @@ def gerar_alfa(s):
 
     Complexidade:
 
-    Tempo:
+    Tempo: O(n**2)
 
-    Espaço:
+    Espaço: O(n)
     """
     reg = deque([()])
-
 
     for n in s:
 
