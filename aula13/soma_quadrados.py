@@ -1,11 +1,17 @@
 def soma_quadrados(n):
 
-    quadrados = []
+
+    quadrados = [()]
     visitados = []
 
+    for q in range(n+1):
+        if q**2 <= n:
+            visitados.append(q**2)
 
 
+        pass
 
+    print(visitados)
 
     return quadrados
 
