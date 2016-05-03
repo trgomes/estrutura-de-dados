@@ -1,7 +1,13 @@
 def soma_quadrados(n):
 
+    quadrados = []
+    visitados = []
 
-    pass
+
+
+
+
+    return quadrados
 
 
 import unittest
