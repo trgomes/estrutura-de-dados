@@ -1,19 +1,47 @@
+from collections import Counter
+
+
 def soma_quadrados(n):
 
 
-    quadrados = [()]
-    visitados = []
-
-    for q in range(n+1):
-        if q**2 <= n:
-            visitados.append(q**2)
+    quadrados = []
+    resultados = {0:[0], 1:[1]}
 
 
-        pass
+    if n == 0 or n==1:
+        return resultados[n]
+    else:
+        for q in range(1,n+1):
+            if q**2 <= n:
+                quadrados.append(q**2)
 
-    print(visitados)
+        print(quadrados)
 
-    return quadrados
+        entrada = n
+        listaAux = []
+        aux = 0
+        while n not in resultados.keys() and n != 0:
+            if quadrados:
+                aux = quadrados.pop()
+
+            n = n - aux
+            listaAux.append(aux)
+
+        print("listaAux",listaAux)
+        resultados[entrada] = listaAux
+
+
+        if n != 0:
+            listaAtual = resultados[entrada]
+            listaAnterior = resultados[n][-1]
+            listaAtual.append(listaAnterior)
+
+        # print(listaAtual, listaAnterior)
+
+    # print("Aqui",quadrados)
+    print(resultados)
+
+    return resultados[entrada]
 
 
 import unittest
@@ -27,10 +55,10 @@ class SomaQuadradosPerfeitosTestes(unittest.TestCase):
         self.assert_possui_mesmo_elementos([1], soma_quadrados(1))
 
     def teste_2(self):
-        self.assert_possui_mesmo_elementos([1, 1], soma_quadrados(0))
+        self.assert_possui_mesmo_elementos([1, 1], soma_quadrados(2))
 
     def teste_3(self):
-        self.assert_possui_mesmo_elementos([1, 1, 1], soma_quadrados(0))
+        self.assert_possui_mesmo_elementos([1, 1, 1], soma_quadrados(3))
 
     def teste_4(self):
         self.assert_possui_mesmo_elementos([4], soma_quadrados(4))
@@ -45,4 +73,4 @@ class SomaQuadradosPerfeitosTestes(unittest.TestCase):
         self.assert_possui_mesmo_elementos([4, 4, 4], soma_quadrados(12))
 
     def assert_possui_mesmo_elementos(self, esperado, resultado):
-        self.assertSetEqual(set(esperado), set(resultado))
+        self.assertEqual(Counter(esperado), Counter(resultado))
