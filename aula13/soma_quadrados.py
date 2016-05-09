@@ -19,10 +19,11 @@ def soma_quadrados(n):
 
         entrada = n
         listaAux = []
-        aux = 0
+        aux = n
         while n not in resultados.keys() and n != 0:
-            if quadrados:
-                aux = quadrados.pop()
+            if quadrados and n not in quadrados:
+                while aux >= n and quadrados and aux != n-aux:
+                    aux = quadrados.pop()
 
             n = n - aux
             listaAux.append(aux)
