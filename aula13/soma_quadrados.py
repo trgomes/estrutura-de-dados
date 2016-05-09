@@ -1,6 +1,7 @@
 from collections import Counter
 
 
+
 def soma_quadrados(n):
 
 

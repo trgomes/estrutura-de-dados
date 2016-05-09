@@ -1,5 +1,5 @@
 from collections import Counter
-
+from collections import deque
 
 def soma_quadrados(n):
 
@@ -36,14 +36,16 @@ def soma_quadrados(n):
                 listaAux.append(aux)
 
             print("listaAux",listaAux)
-            resultados[entrada] = listaAux
+
 
             cont += 1
 
-            if n != 0:
-                listaAtual = resultados[entrada]
-                listaAnterior = resultados[n][-1]
-                listaAtual.append(listaAnterior)
+            if n == 0:
+                resultados[entrada] = listaAux
+            else:
+                listaAtual = listaAux
+                listaAnterior = resultados[n]
+                resultados[entrada]= listaAtual.__add__(listaAnterior)
 
 
         # print(listaAtual, listaAnterior)
