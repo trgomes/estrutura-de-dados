@@ -9,17 +9,17 @@ def soma_quadrados(n):
 
     cont = 2
     num = n
-
+    quadrados = [1]
     if n == 0 or n==1:
         return resultados[n]
     else:
-
+        # marcador = 1
         while cont <= num:
             n = cont
-            quadrados = []
+
 
             for q in range(1,n+1):
-                if q**2 <= n:
+                if q**2 <= n and q**2 not in quadrados:
                     quadrados.append(q**2)
 
             print(quadrados)
@@ -27,6 +27,8 @@ def soma_quadrados(n):
             entrada = n
             listaAux = []
             aux = n
+
+
             while n not in resultados.keys() and n != 0:
                 if quadrados and n not in quadrados:
                     while aux >= n and quadrados and aux != n-aux:

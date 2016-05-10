@@ -1,47 +1,55 @@
 from collections import Counter
-
-
+from collections import deque
 
 def soma_quadrados(n):
 
 
-    quadrados = []
+
     resultados = {0:[0], 1:[1]}
 
-
+    cont = 2
+    num = n
+    quadrados = []
     if n == 0 or n==1:
         return resultados[n]
     else:
-        for q in range(1,n+1):
-            if q**2 <= n:
-                quadrados.append(q**2)
 
-        print(quadrados)
-
-        entrada = n
-        listaAux = []
-        aux = n
-        while n not in resultados.keys() and n != 0:
-            if quadrados and n not in quadrados:
-                while aux >= n and quadrados and aux != n-aux:
-                    aux = quadrados.pop()
-
-            n = n - aux
-            listaAux.append(aux)
-
-        print("listaAux",listaAux)
-        resultados[entrada] = listaAux
+        while cont <= num:
+            n = cont
 
 
-        if n != 0:
-            listaAtual = resultados[entrada]
-            listaAnterior = resultados[n][-1]
-            listaAtual.append(listaAnterior)
+            for q in range(1,n+1):
+                if q**2 <= n and q**2 not in quadrados:
+                    quadrados.append(q**2)
+
+            # print(quadrados)
+
+            entrada = n
+            listaAux = []
+            aux = n
+            while n not in resultados.keys() and n != 0:
+                if quadrados and n not in quadrados:
+                    while aux >= n and quadrados and aux != n-aux:
+                        aux = quadrados.pop()
+
+                n = n - aux
+                listaAux.append(aux)
+
+
+            cont += 1
+
+            if n == 0:
+                resultados[entrada] = listaAux
+            else:
+                listaAtual = listaAux
+                listaAnterior = resultados[n]
+                resultados[entrada]= listaAtual.__add__(listaAnterior)
+
 
         # print(listaAtual, listaAnterior)
 
     # print("Aqui",quadrados)
-    print(resultados)
+    # print(resultados)
 
     return resultados[entrada]
 
