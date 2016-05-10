@@ -11,7 +11,6 @@ def quadrados_menores(n):
     return quadrados
 
 def soma_quadrados(n):
-    """Retorna a lista final requerida pelo problema."""
 
     if n == 0:
         return [0]
@@ -29,9 +28,6 @@ def soma_quadrados(n):
     return lista_final
 
 def gerar_solucao(menores, n):
-    """Auxilio na geracao da solucao. A solucao sera a menor
-    lista gerada por essa funcao."""
-
     ultimo = menores.pop()
     lista_gerada = [ultimo]
     lista_gerada.extend(soma_quadrados(n - ultimo))
