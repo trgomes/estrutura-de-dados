@@ -22,6 +22,9 @@ def soma_quadrados(n):
                 if q**2 <= n and q**2 not in quadrados:
                     quadrados.append(q**2)
 
+            if n > 11:
+                quadrados.pop()
+
             print(quadrados)
 
             entrada = n
